@@ -12,8 +12,9 @@ const Coffee = db.define('coffee', {
   }
 })
 
-Coffee.beforeValidate(user => {
-  if(user.ingredients.indexOf("love") === -1) user.ingredients.push("love")
+// Hooks
+Coffee.beforeSave(user => {
+  if(Array.isArray(user.ingredients) && !user.ingredients.includes("love")) user.ingredients.push("love")
 })
 
 // Instance Method
