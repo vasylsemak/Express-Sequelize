@@ -3,7 +3,45 @@ const db = require('./database')
 const Coffee = require('./coffee.model')
 
 const Pug = db.define('pugs', {
-  // your code here
+  name: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  age: {
+    type: Sequelize.INTEGER,
+    defaultValue: 0
+  },
+  biography: {
+    type: Sequelize.TEXT
+  }
 })
+
+// Instance Methods
+Pug.prototype.isPuppy = function() {
+  return this.age < 1 ? true : false
+}
+
+Pug.prototype.shortBio = function() {
+  let long = this.biography
+  let short = '';
+
+  for(let i = 0; i < long.length; i++) {
+    if(long[i] === '.' || long[i] === '!' || long[i] === '?') {
+      short = long.slice(0, i)
+      break
+    }
+  }
+  return short
+  // return this.biography.match(/[\w\s]+/)[0]
+}
+
+// Class Methods
+
+// Hooks
+Pug.beforeSave(pug => {
+  pug.name = pug.name[0].toUpperCase() + pug.name.slice(1)
+  return pug
+})
+
 
 module.exports = Pug

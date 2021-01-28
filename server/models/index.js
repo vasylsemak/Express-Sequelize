@@ -2,10 +2,10 @@ const db = require('./database')
 const Pug = require('./pug.model')
 const Coffee = require('./coffee.model')
 
-// VVV assign relations below VVV //
+Coffee.hasMany(Pug)
+Pug.belongsTo(Coffee, { as: 'favoriteCoffee' })
 
-
-// ^^^ assign relations above ^^^ //
+Pug.belongsToMany(Pug, { as: 'friends', through: 'friendship' })
 
 module.exports = {
   db,
