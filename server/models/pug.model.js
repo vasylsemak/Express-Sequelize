@@ -46,8 +46,6 @@ Pug.findByCoffee = function(coffeeName) {
   })
 }
 
-
-
 // Hooks
 Pug.beforeSave(pug =>
   pug.name = pug.name[0].toUpperCase() + pug.name.slice(1))
