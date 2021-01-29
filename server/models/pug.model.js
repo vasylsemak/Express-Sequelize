@@ -36,12 +36,20 @@ Pug.prototype.shortBio = function() {
 }
 
 // Class Methods
+Pug.findByCoffee = function(coffeeName) {
+  return Pug.findAll({
+    include: {
+      model: Coffee,
+      as: 'favoriteCoffee',
+      where: { name: coffeeName }
+    }
+  })
+}
+
+
 
 // Hooks
-Pug.beforeSave(pug => {
-  pug.name = pug.name[0].toUpperCase() + pug.name.slice(1)
-  return pug
-})
-
+Pug.beforeSave(pug =>
+  pug.name = pug.name[0].toUpperCase() + pug.name.slice(1))
 
 module.exports = Pug

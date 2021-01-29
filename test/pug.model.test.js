@@ -109,7 +109,7 @@ describe('Pug model', () => {
   })
 
   // Check out: http://docs.sequelizejs.com/manual/tutorial/querying.html#relations-associations
-  xdescribe('class method: `findByCoffee`', () => {
+  describe('class method: `findByCoffee`', () => {
     it('finds all pugs with the given favorite coffee', async () => {
       const latte = await Coffee.create({name: 'latte'})
       const cortado = await Coffee.create({name: 'cortado'})
