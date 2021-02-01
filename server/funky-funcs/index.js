@@ -29,8 +29,8 @@ const invert = (obj) => {
   const inverted = {}
 
   for(let i = 0; i < keys.length; i++) {
-    let str = vals[i].toString()
-    inverted[str] = keys[i]
+    let newKey = vals[i].toString()
+    inverted[newKey] = keys[i]
   }
   return inverted
 }
