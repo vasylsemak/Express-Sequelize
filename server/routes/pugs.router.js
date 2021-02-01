@@ -1,7 +1,7 @@
 const router = require('express').Router()
 const { Pug } = require('../models')
 
-
+// pugs route
 router
   .get('/', async (req, res, next) => {
     try {
@@ -20,7 +20,18 @@ router
     }
   })
 
+// pugs favourite coffee
+router.get('/favoriteCoffee/:favoriteCoffeeName', async(req, res, next) => {
+  try {
+    const pugsWithCoffee = await Pug.findByCoffee(req.params.favoriteCoffeeName)
+    res.status(200).json(pugsWithCoffee)
+  } catch (err) {
+    next(err)
+  }
+})
 
+
+// single pug route
 router
   .get('/:pugId', async (req, res, next) => {
     try {
@@ -64,14 +75,5 @@ router
       next(err.status)
     }
    })
-
-router.get('/favoriteCoffee/:favoriteCoffeeName', async(req, res, next) => {
-  try {
-    const pugsWithCoffee = await Pug.findByCoffee(req.params.favoriteCoffeeName)
-    res.status(200).json(pugsWithCoffee)
-  } catch (err) {
-    next(err)
-  }
-})
 
 module.exports = router
